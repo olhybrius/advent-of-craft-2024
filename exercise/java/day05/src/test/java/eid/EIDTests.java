@@ -3,6 +3,7 @@ package eid;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.BDDAssertions.thenNoException;
 import static org.assertj.core.api.BDDAssertions.thenThrownBy;
 
 class EIDTests {
@@ -11,5 +12,13 @@ class EIDTests {
         thenThrownBy(() -> new EID(null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("EID cannot be null.");
+    }
+
+    @Test
+    void an_EID_should_be_eight_characters_long() {
+        thenThrownBy(() -> new EID("123456789"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("EID must be 8 characters long.");
+        thenNoException().isThrownBy(() -> new EID("12345678"));
     }
 }
