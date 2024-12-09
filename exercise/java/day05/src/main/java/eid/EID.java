@@ -2,8 +2,6 @@ package eid;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Objects;
-
 public class EID {
 
     private enum ElfSex {
@@ -27,8 +25,32 @@ public class EID {
         }
     }
 
+    private record ControlKey(int value) {
+        private static final int CONTROL_KEY_MAX_VALUE = 97;
+
+        public static ControlKey forNumber(int number) {
+            return new ControlKey(CONTROL_KEY_MAX_VALUE - number % CONTROL_KEY_MAX_VALUE);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (obj instanceof ControlKey controlKey) {
+                return this.value == controlKey.value;
+            }
+            if (obj instanceof Integer intValue) {
+                return this.value == intValue;
+            }
+            return false;
+        }
+
+        @Override
+        public int hashCode() {
+            return Integer.hashCode(value);
+        }
+    }
+
     private static final int EID_LENGTH = 8;
-    private static final int CONTROL_KEY_MAX_VALUE = 97;
     private static final int CONTROL_KEY_START_INDEX = 6;
 
     public EID(String value) {
@@ -45,7 +67,7 @@ public class EID {
     private void validateControlKey(String value) {
         var number = Integer.parseInt(value.substring(0, CONTROL_KEY_START_INDEX));
         var controlKey = Integer.parseInt(value.substring(CONTROL_KEY_START_INDEX, EID_LENGTH));
-        if (CONTROL_KEY_MAX_VALUE - number % CONTROL_KEY_MAX_VALUE != controlKey) {
+        if (!ControlKey.forNumber(number).equals(controlKey)) {
             throw new IllegalArgumentException("Invalid control key.");
         }
     }
@@ -62,7 +84,7 @@ public class EID {
         }
         try {
             Integer.parseInt(value);
-        } catch(NumberFormatException numberFormatException) {
+        } catch (NumberFormatException numberFormatException) {
             throw new IllegalArgumentException("EID must only contain digits.");
         }
     }
