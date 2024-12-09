@@ -35,6 +35,11 @@ public class EID {
         if (StringUtils.isBlank(value)) {
             throw new IllegalArgumentException("EID cannot be blank.");
         }
+        try {
+            Integer.parseInt(value);
+        } catch(NumberFormatException numberFormatException) {
+            throw new IllegalArgumentException("EID must only contain digits.");
+        }
         if (value.length() != EID_LENGTH) {
             throw new IllegalArgumentException("EID must be " + EID_LENGTH + " characters long.");
         }

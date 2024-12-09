@@ -32,6 +32,13 @@ class EIDTests {
         thenNoException().isThrownBy(() -> new EID("19800767"));
     }
 
+    @Test
+    void an_EID_must_only_contain_digits() {
+        thenThrownBy(() -> new EID("a23456789"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("EID must only contain digits.");
+    }
+
     @ParameterizedTest
     @ValueSource(ints = {0, 4, 5, 6, 7, 8, 9})
     void exception_is_thrown_for_invalid_sex_identifier(int identifier) {
