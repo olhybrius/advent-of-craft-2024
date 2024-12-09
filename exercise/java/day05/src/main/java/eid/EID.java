@@ -8,6 +8,9 @@ public class EID {
         if (value == null) {
             throw new IllegalArgumentException("EID cannot be null.");
         }
+        if (value.isEmpty()) {
+            throw new IllegalArgumentException("EID cannot be empty.");
+        }
         if (value.length() != EID_LENGTH) {
             throw new IllegalArgumentException("EID must be " + EID_LENGTH + " characters long.");
         }
