@@ -28,6 +28,8 @@ public class EID {
     }
 
     private static final int EID_LENGTH = 8;
+    private static final int CONTROL_KEY_MAX_VALUE = 97;
+    private static final int CONTROL_KEY_START_INDEX = 6;
 
     public EID(String value) {
         if (StringUtils.isBlank(value)) {
@@ -37,7 +39,7 @@ public class EID {
             throw new IllegalArgumentException("EID must be " + EID_LENGTH + " characters long.");
         }
         ElfSex.getByIdentifier(value.charAt(0));
-        if (97 - Integer.parseInt(value.substring(0, 6)) % 97 != Integer.parseInt(value.substring(6, EID_LENGTH))) {
+        if (CONTROL_KEY_MAX_VALUE - Integer.parseInt(value.substring(0, CONTROL_KEY_START_INDEX)) % CONTROL_KEY_MAX_VALUE != Integer.parseInt(value.substring(CONTROL_KEY_START_INDEX, EID_LENGTH))) {
             throw new IllegalArgumentException("Invalid control key.");
         }
     }
