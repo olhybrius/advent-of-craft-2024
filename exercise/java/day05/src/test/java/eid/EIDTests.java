@@ -11,14 +11,14 @@ class EIDTests {
     void an_EID_should_not_be_null() {
         thenThrownBy(() -> new EID(null))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("EID cannot be null.");
+                .hasMessage("EID cannot be blank.");
     }
 
     @Test
     void an_EID_should_not_be_empty() {
         thenThrownBy(() -> new EID(""))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("EID cannot be empty.");
+                .hasMessage("EID cannot be blank.");
     }
 
     @Test
