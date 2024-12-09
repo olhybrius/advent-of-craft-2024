@@ -37,5 +37,8 @@ public class EID {
             throw new IllegalArgumentException("EID must be " + EID_LENGTH + " characters long.");
         }
         ElfSex.getByIdentifier(value.charAt(0));
+        if (97 - Integer.parseInt(value.substring(0, 6)) % 97 != Integer.parseInt(value.substring(6, EID_LENGTH))) {
+            throw new IllegalArgumentException("Invalid control key.");
+        }
     }
 }
