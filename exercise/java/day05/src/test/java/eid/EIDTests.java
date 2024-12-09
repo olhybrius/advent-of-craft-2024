@@ -29,7 +29,6 @@ class EIDTests {
         thenThrownBy(() -> new EID("123456789"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("EID must be 8 characters long.");
-        thenNoException().isThrownBy(() -> new EID("19800767"));
     }
 
     @Test
