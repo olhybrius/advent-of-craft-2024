@@ -33,10 +33,10 @@ class EIDTests {
     void an_EID_should_start_with_a_valid_sex_identifier() {
         thenThrownBy(() -> new EID("02345678"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("EID must start with a valid sex identifier.");
+                .hasMessage("Unknown sex for identifier 0.");
         thenThrownBy(() -> new EID("42345678"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("EID must start with a valid sex identifier.");
+                .hasMessage("Unknown sex for identifier 4.");
         thenNoException().isThrownBy(() -> new EID("12345678"));
         thenNoException().isThrownBy(() -> new EID("22345678"));
         thenNoException().isThrownBy(() -> new EID("32345678"));
