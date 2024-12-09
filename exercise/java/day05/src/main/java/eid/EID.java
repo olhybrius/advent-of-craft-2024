@@ -53,11 +53,15 @@ public class EID {
     private static final int EID_LENGTH = 8;
     private static final int CONTROL_KEY_START_INDEX = 6;
 
-    public EID(String value) {
+    private EID(String value) {
         validateFormat(value);
         validateLength(value);
         validateSexIdentifier(value);
         validateControlKey(value);
+    }
+
+    public static EID parse(String value) {
+        return new EID(value);
     }
 
     private static void validateSexIdentifier(String value) {
