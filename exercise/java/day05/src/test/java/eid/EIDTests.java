@@ -44,4 +44,9 @@ class EIDTests {
     void no_exception_is_thrown_for_valid_sex_identifier(int identifier) {
         thenNoException().isThrownBy(() -> new EID(identifier + "2345678"));
     }
+
+    @Test
+    void an_EID_can_be_instantiated_with_the_correct_control_key() {
+        thenNoException().isThrownBy(() -> new EID(  "19800767"));
+    }
 }
