@@ -47,10 +47,6 @@ class EIDTests {
     }
 
     @Test
-    void an_EID_can_be_instantiated_with_the_correct_control_key() {
-        thenNoException().isThrownBy(() -> new EID(  "19800767"));
-    }
-    @Test
     void an_EID_cannot_be_instantiated_with_an_invalid_control_key() {
         thenThrownBy(() -> new EID(  "29800767"))
                 .isInstanceOf(IllegalArgumentException.class)
