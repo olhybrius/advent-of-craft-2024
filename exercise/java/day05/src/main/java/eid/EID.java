@@ -39,7 +39,9 @@ public class EID {
             throw new IllegalArgumentException("EID must be " + EID_LENGTH + " characters long.");
         }
         ElfSex.getByIdentifier(value.charAt(0));
-        if (CONTROL_KEY_MAX_VALUE - Integer.parseInt(value.substring(0, CONTROL_KEY_START_INDEX)) % CONTROL_KEY_MAX_VALUE != Integer.parseInt(value.substring(CONTROL_KEY_START_INDEX, EID_LENGTH))) {
+        var number = Integer.parseInt(value.substring(0, CONTROL_KEY_START_INDEX));
+        var controlKey = Integer.parseInt(value.substring(CONTROL_KEY_START_INDEX, EID_LENGTH));
+        if (CONTROL_KEY_MAX_VALUE - number % CONTROL_KEY_MAX_VALUE != controlKey) {
             throw new IllegalArgumentException("Invalid control key.");
         }
     }
