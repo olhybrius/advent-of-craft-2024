@@ -1,6 +1,8 @@
 package eid;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.thenNoException;
@@ -29,16 +31,17 @@ class EIDTests {
         thenNoException().isThrownBy(() -> new EID("12345678"));
     }
 
-    @Test
-    void an_EID_should_start_with_a_valid_sex_identifier() {
-        thenThrownBy(() -> new EID("02345678"))
+    @ParameterizedTest
+    @ValueSource(ints = {0, 4, 5, 6, 7, 8, 9})
+    void exception_is_thrown_for_invalid_sex_identifier(int identifier) {
+        thenThrownBy(() -> new EID(identifier + "2345678"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Unknown sex for identifier 0.");
-        thenThrownBy(() -> new EID("42345678"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Unknown sex for identifier 4.");
-        thenNoException().isThrownBy(() -> new EID("12345678"));
-        thenNoException().isThrownBy(() -> new EID("22345678"));
-        thenNoException().isThrownBy(() -> new EID("32345678"));
+                .hasMessage("Unknown sex for identifier " + identifier + ".");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void no_exception_is_thrown_for_valid_sex_identifier(int identifier) {
+        thenNoException().isThrownBy(() -> new EID(identifier + "2345678"));
     }
 }
