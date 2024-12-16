@@ -30,6 +30,8 @@ public class Business {
                     Gift finalGift = inventory.pickUpGift(manufacturedGift.barCode());
                     if (finalGift != null) {
                         sleigh.put(child, "Gift: " + finalGift.name() + " has been loaded!");
+                    } else {
+                        sleigh.addError(child, "Missing gift: The gift has probably been misplaced by the elves!");
                     }
                 } else {
                     sleigh.addError(child, "Missing gift: Gift wasn't manufactured!");
