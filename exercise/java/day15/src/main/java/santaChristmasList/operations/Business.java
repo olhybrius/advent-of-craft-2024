@@ -5,7 +5,7 @@ import santaChristmasList.operations.dependencies.Inventory;
 import santaChristmasList.operations.dependencies.WishList;
 import santaChristmasList.operations.models.Child;
 import santaChristmasList.operations.models.Gift;
-import santaChristmasList.operations.models.Sleigh;
+import santaChristmasList.operations.models.SleighLoadingResult;
 
 public class Business {
 
@@ -19,8 +19,8 @@ public class Business {
         this.wishList = wishList;
     }
 
-    public Sleigh loadGiftsInSleigh(Child... children) {
-        Sleigh sleigh = new Sleigh();
+    public SleighLoadingResult loadGiftsInSleigh(Child... children) {
+        var sleigh = new SleighLoadingResult();
 
         for (Child child : children) {
             Gift gift = wishList.identifyGift(child);
@@ -31,6 +31,8 @@ public class Business {
                     if (finalGift != null) {
                         sleigh.put(child, "Gift: " + finalGift.name() + " has been loaded!");
                     }
+                } else {
+                    sleigh.addError(child, "Missing gift: Gift wasn't manufactured!");
                 }
             }
         }
