@@ -24,21 +24,21 @@ public class Business {
 
         for (Child child : children) {
             Gift gift = wishList.identifyGift(child);
-            if (gift != null) {
-                var manufacturedGift = factory.findManufacturedGift(gift);
-                if (manufacturedGift != null) {
-                    Gift finalGift = inventory.pickUpGift(manufacturedGift.barCode());
-                    if (finalGift != null) {
-                        sleigh.addSuccess(child, "Gift: " + finalGift.name() + " has been loaded!");
-                    } else {
-                        sleigh.addError(child, "Missing gift: The gift has probably been misplaced by the elves!");
-                    }
-                } else {
-                    sleigh.addError(child, "Missing gift: Gift wasn't manufactured!");
-                }
-            } else {
+            if (gift == null) {
                 sleigh.addError(child, "Missing gift: Child wasn't nice this year!");
+                continue;
             }
+            var manufacturedGift = factory.findManufacturedGift(gift);
+            if (manufacturedGift == null) {
+                sleigh.addError(child, "Missing gift: Gift wasn't manufactured!");
+                continue;
+            }
+            Gift finalGift = inventory.pickUpGift(manufacturedGift.barCode());
+            if (finalGift == null) {
+                sleigh.addError(child, "Missing gift: The gift has probably been misplaced by the elves!");
+                continue;
+            }
+            sleigh.addSuccess(child, "Gift: " + finalGift.name() + " has been loaded!");
         }
         return sleigh;
     }
