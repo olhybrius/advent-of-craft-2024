@@ -9,14 +9,14 @@ public class SleighLoadingResult {
         BAD_CHILD("Missing gift: Child wasn't nice this year!"),
         GIFT_NOT_MANUFACTURED("Missing gift: Gift wasn't manufactured!"),
         GIFT_MISPLACED("Missing gift: The gift has probably been misplaced by the elves!");
-        private final String reason;
+        private final String description;
 
-        SleighLoadingError(String reason) {
-            this.reason = reason;
+        SleighLoadingError(String description) {
+            this.description = description;
         }
 
-        public String getReason() {
-            return reason;
+        public String getDescription() {
+            return description;
         }
     }
 

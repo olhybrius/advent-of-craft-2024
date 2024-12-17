@@ -55,7 +55,7 @@ public class BusinessTests {
 
         assertThat(sleigh.getErrors())
                 .extractingByKey(john)
-                .extracting(SleighLoadingResult.SleighLoadingError::getReason)
+                .extracting(SleighLoadingResult.SleighLoadingError::getDescription)
                 .isEqualTo("Missing gift: Child wasn't nice this year!");
     }
 
@@ -68,7 +68,7 @@ public class BusinessTests {
 
         assertThat(sleigh.getErrors())
                 .extractingByKey(john)
-                .extracting(SleighLoadingResult.SleighLoadingError::getReason)
+                .extracting(SleighLoadingResult.SleighLoadingError::getDescription)
                 .isEqualTo("Missing gift: Gift wasn't manufactured!");
     }
 
@@ -82,7 +82,7 @@ public class BusinessTests {
 
         assertThat(sleigh.getErrors())
                 .extractingByKey(john)
-                .extracting(SleighLoadingResult.SleighLoadingError::getReason)
+                .extracting(SleighLoadingResult.SleighLoadingError::getDescription)
                 .isEqualTo("Missing gift: The gift has probably been misplaced by the elves!");
     }
 }
