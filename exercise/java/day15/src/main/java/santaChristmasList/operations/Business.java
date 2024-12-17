@@ -38,7 +38,7 @@ public class Business {
                 sleigh.addError(child, "Missing gift: The gift has probably been misplaced by the elves!");
                 continue;
             }
-            sleigh.addSuccess(child, "Gift: " + finalGift.name() + " has been loaded!");
+            sleigh.addSuccess(child, gift);
         }
         return sleigh;
     }

@@ -19,7 +19,8 @@ public class SleighLoadingResult {
         return successes;
     }
 
-    public void addSuccess(Child child, String information) {
+    public void addSuccess(Child child, Gift gift) {
+        var information = "Gift: " + gift.name() + " has been loaded!";
         successes.put(child, information);
     }
 }
