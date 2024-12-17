@@ -9,6 +9,7 @@ import santaChristmasList.operations.dependencies.WishList;
 import santaChristmasList.operations.models.Child;
 import santaChristmasList.operations.models.Gift;
 import santaChristmasList.operations.models.ManufacturedGift;
+import santaChristmasList.operations.models.SleighLoadingResult;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -52,7 +53,10 @@ public class BusinessTests {
         var business = new Business(factory, inventory, wishList);
         var sleigh = business.loadGiftsInSleigh(john);
 
-        assertThat(sleigh.getErrors()).containsEntry(john, "Missing gift: Child wasn't nice this year!");
+        assertThat(sleigh.getErrors())
+                .extractingByKey(john)
+                .extracting(SleighLoadingResult.SleighLoadingError::getReason)
+                .isEqualTo("Missing gift: Child wasn't nice this year!");
     }
 
     @Test
@@ -62,7 +66,10 @@ public class BusinessTests {
         var business = new Business(factory, inventory, wishList);
         var sleigh = business.loadGiftsInSleigh(john);
 
-        assertThat(sleigh.getErrors()).containsEntry(john, "Missing gift: Gift wasn't manufactured!");
+        assertThat(sleigh.getErrors())
+                .extractingByKey(john)
+                .extracting(SleighLoadingResult.SleighLoadingError::getReason)
+                .isEqualTo("Missing gift: Gift wasn't manufactured!");
     }
 
     @Test
@@ -73,6 +80,9 @@ public class BusinessTests {
         var business = new Business(factory, inventory, wishList);
         var sleigh = business.loadGiftsInSleigh(john);
 
-        assertThat(sleigh.getErrors()).containsEntry(john, "Missing gift: The gift has probably been misplaced by the elves!");
+        assertThat(sleigh.getErrors())
+                .extractingByKey(john)
+                .extracting(SleighLoadingResult.SleighLoadingError::getReason)
+                .isEqualTo("Missing gift: The gift has probably been misplaced by the elves!");
     }
 }

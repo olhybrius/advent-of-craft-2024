@@ -25,17 +25,17 @@ public class Business {
         for (Child child : children) {
             Gift gift = wishList.identifyGift(child);
             if (gift == null) {
-                sleigh.addError(child, "Missing gift: Child wasn't nice this year!");
+                sleigh.addError(child, SleighLoadingResult.SleighLoadingError.BAD_CHILD);
                 continue;
             }
             var manufacturedGift = factory.findManufacturedGift(gift);
             if (manufacturedGift == null) {
-                sleigh.addError(child, "Missing gift: Gift wasn't manufactured!");
+                sleigh.addError(child, SleighLoadingResult.SleighLoadingError.GIFT_NOT_MANUFACTURED);
                 continue;
             }
             Gift finalGift = inventory.pickUpGift(manufacturedGift.barCode());
             if (finalGift == null) {
-                sleigh.addError(child, "Missing gift: The gift has probably been misplaced by the elves!");
+                sleigh.addError(child, SleighLoadingResult.SleighLoadingError.GIFT_MISPLACED);
                 continue;
             }
             sleigh.addSuccess(child, gift);
