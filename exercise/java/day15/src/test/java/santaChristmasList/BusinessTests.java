@@ -44,7 +44,8 @@ public class BusinessTests {
         var business = new Business(factory, inventory, wishList);
         var sleigh = business.loadGiftsInSleigh(john);
 
-        assertThat(sleigh.get(john)).isEqualTo("Gift: Toy has been loaded!");
+        assertThat(sleigh.getSuccesses()).containsKey(john);
+        assertThat(sleigh.getSuccesses().get(john)).isEqualTo("Gift: Toy has been loaded!");
     }
 
     @Test

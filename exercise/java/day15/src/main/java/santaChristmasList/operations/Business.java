@@ -29,7 +29,7 @@ public class Business {
                 if (manufacturedGift != null) {
                     Gift finalGift = inventory.pickUpGift(manufacturedGift.barCode());
                     if (finalGift != null) {
-                        sleigh.put(child, "Gift: " + finalGift.name() + " has been loaded!");
+                        sleigh.addSuccess(child, "Gift: " + finalGift.name() + " has been loaded!");
                     } else {
                         sleigh.addError(child, "Missing gift: The gift has probably been misplaced by the elves!");
                     }
