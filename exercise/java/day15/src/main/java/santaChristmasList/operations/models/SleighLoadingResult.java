@@ -3,7 +3,7 @@ package santaChristmasList.operations.models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SleighLoadingResult extends HashMap<Child, String> {
+public class SleighLoadingResult {
 
     private final Map<Child, String> successes = new HashMap<>();
     private final Map<Child, String> errors = new HashMap<>();
