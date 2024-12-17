@@ -44,8 +44,7 @@ public class BusinessTests {
         var business = new Business(factory, inventory, wishList);
         var sleigh = business.loadGiftsInSleigh(john);
 
-        assertThat(sleigh.getSuccesses()).containsKey(john);
-        assertThat(sleigh.getSuccesses().get(john)).isEqualTo("Gift: Toy has been loaded!");
+        assertThat(sleigh.getSuccesses()).containsEntry(john, "Gift: Toy has been loaded!");
     }
 
     @Test
@@ -53,8 +52,7 @@ public class BusinessTests {
         var business = new Business(factory, inventory, wishList);
         var sleigh = business.loadGiftsInSleigh(john);
 
-        assertThat(sleigh.getErrors()).containsKey(john);
-        assertThat(sleigh.getErrors().get(john)).isEqualTo("Missing gift: Child wasn't nice this year!");
+        assertThat(sleigh.getErrors()).containsEntry(john, "Missing gift: Child wasn't nice this year!");
     }
 
     @Test
@@ -63,8 +61,8 @@ public class BusinessTests {
 
         var business = new Business(factory, inventory, wishList);
         var sleigh = business.loadGiftsInSleigh(john);
-        assertThat(sleigh.getErrors()).containsKey(john);
-        assertThat(sleigh.getErrors().get(john)).isEqualTo("Missing gift: Gift wasn't manufactured!");
+
+        assertThat(sleigh.getErrors()).containsEntry(john, "Missing gift: Gift wasn't manufactured!");
     }
 
     @Test
@@ -75,7 +73,6 @@ public class BusinessTests {
         var business = new Business(factory, inventory, wishList);
         var sleigh = business.loadGiftsInSleigh(john);
 
-        assertThat(sleigh.getErrors()).containsKey(john);
-        assertThat(sleigh.getErrors().get(john)).isEqualTo("Missing gift: The gift has probably been misplaced by the elves!");
+        assertThat(sleigh.getErrors()).containsEntry(john, "Missing gift: The gift has probably been misplaced by the elves!");
     }
 }
