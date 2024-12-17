@@ -52,7 +52,8 @@ public class BusinessTests {
         var business = new Business(factory, inventory, wishList);
         var sleigh = business.loadGiftsInSleigh(john);
 
-        assertThat(sleigh.containsKey(john)).isFalse();
+        assertThat(sleigh.getErrors()).containsKey(john);
+        assertThat(sleigh.getErrors().get(john)).isEqualTo("Missing gift: Child wasn't nice this year!");
     }
 
     @Test

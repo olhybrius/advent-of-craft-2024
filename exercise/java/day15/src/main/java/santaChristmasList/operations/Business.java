@@ -36,6 +36,8 @@ public class Business {
                 } else {
                     sleigh.addError(child, "Missing gift: Gift wasn't manufactured!");
                 }
+            } else {
+                sleigh.addError(child, "Missing gift: Child wasn't nice this year!");
             }
         }
         return sleigh;
